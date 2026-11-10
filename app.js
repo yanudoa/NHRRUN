@@ -74,6 +74,7 @@ function renderQ(){
   $('qOpts').innerHTML = Q.o.map(([txt],j) => `<li><button class="opt${state.answers[i]===j?' picked':''}" data-j="${j}" style="animation-delay:${.06+j*.05}s"><span class="key">${'ABCDE'[j]}</span><span>${esc(txt)}</span></button></li>`).join('');
   $('qBack').textContent = i === 0 ? '← 처음부터' : '← 이전 문항';
   $('qBack').classList.toggle('md', i !== 0);
+  $('qBack').classList.toggle('sm', i === 0);
   const [mk, x, y, w] = Q.m, m = $('qMascot');
   m.style.cssText = `left:${x}px;top:${y}px;width:${w}px`;
   m.innerHTML = `<img class="bob" style="width:100%;height:auto" src="${src(mk)}" alt="">`;
