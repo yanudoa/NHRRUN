@@ -27,7 +27,8 @@
 
   <section class="screen" id="s-reg" hidden>
     <div class="card" id="regForm">
-      <div style="display:flex;flex-direction:column;gap:24px">
+      <div class="reg-main">
+      <div class="reg-form">
         <div class="reg-head">
           <h2><img class="vt" src="assets/text/reg.svg" alt="달리기 전에, 러너 등록부터!"></h2>
           <p>올해 달려온 코스를 돌아보고, 나의 러너 유형을 확인해 보세요.</p>
@@ -44,11 +45,10 @@
           <label class="check"><input type="checkbox" id="agree"> 참여 기록 수집에 동의합니다.</label>
         </div>
       </div>
-      <div class="reg-actions">
-        <button class="btn" id="startQuiz" type="button">출발하기</button>
+        <button class="btn" id="startQuiz" type="button">달려보기</button>
         <p class="reg-msg" id="regMsg" role="alert" hidden></p>
-        <button type="button" class="textlink" data-act="home">← 처음부터</button>
       </div>
+      <button type="button" class="textlink sm" data-act="home">← 처음부터</button>
     </div>
   </section>
 

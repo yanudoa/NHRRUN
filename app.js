@@ -56,7 +56,11 @@ function startQuiz(){
 }
 $('startQuiz').addEventListener('click', startQuiz);
 ['runnerName','runnerTeam'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); startQuiz(); } }));
-['runnerName','runnerTeam','agree'].forEach(id => $(id).addEventListener('input', () => { $(id === 'agree' ? 'agree' : id).classList.remove('err'); if (id === 'agree') document.querySelector('.notice').classList.remove('err'); }));
+['runnerName','runnerTeam','agree'].forEach(id => $(id).addEventListener(id === 'agree' ? 'change' : 'input', () => {
+  $(id).classList.remove('err');
+  if (id === 'agree') document.querySelector('.notice').classList.remove('err');
+  if ($('runnerName').value.trim() && $('runnerTeam').value.trim() && $('agree').checked) $('regMsg').hidden = true;
+}));
 
 /* quiz */
 function renderQ(){
@@ -69,6 +73,7 @@ function renderQ(){
   t.style.setProperty('--w', vtW(k) + 'px'); t.style.setProperty('--h', (vtH(k) > 60 ? 106 : 53) + 'px');
   $('qOpts').innerHTML = Q.o.map(([txt],j) => `<li><button class="opt${state.answers[i]===j?' picked':''}" data-j="${j}" style="animation-delay:${.06+j*.05}s"><span class="key">${'ABCDE'[j]}</span><span>${esc(txt)}</span></button></li>`).join('');
   $('qBack').textContent = i === 0 ? '← 처음부터' : '← 이전 문항';
+  $('qBack').classList.toggle('md', i !== 0);
   const [mk, x, y, w] = Q.m, m = $('qMascot');
   m.style.cssText = `left:${x}px;top:${y}px;width:${w}px`;
   m.innerHTML = `<img class="bob" style="width:100%;height:auto" src="${src(mk)}" alt="">`;
@@ -105,7 +110,7 @@ function renderResult(){
       <svg class="ribbon" style="left:${pct(r.x-ax,aw)};top:${pct(r.y-ay,ah)};width:${pct(r.w,aw)}" viewBox="0 0 ${r.vw} ${r.vh}" fill="none" aria-hidden="true"><path pathLength="1" d="${r.d}" stroke="${T.color}" stroke-width="${r.sw}" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="hero" style="left:${pct(h.x-ax,aw)};top:${pct(h.y-ay,ah)};width:${pct(h.w,aw)}"><img class="bob" style="width:100%;height:auto;animation-delay:1.4s" src="${src(state.type)}" alt="${T.name} 캐릭터"></div>
     </div></div>
-    <div class="r-row r-msg"><div class="msg"><img src="${BOX_SRC}" alt=""><span>${nl(T.msg)}</span></div></div>
+    <div class="r-row r-msg"><div class="msg${T.box === 'plain' ? ' plain' : ''}">${T.box === 'plain' ? '' : `<img src="${BOX_SRC}" alt="">`}<span>${nl(T.msg)}</span></div></div>
     <div class="r-row r-tags"><div class="tags">${T.tags.map(t => `<span class="tag" style="background:${T.color}">${esc(t)}</span>`).join('')}</div></div>
     <div class="r-row r-actions"><button class="btn" id="saveCard">러너 카드 이미지 저장</button><button class="textlink" data-act="retry" style="align-self:center">테스트 다시 하기</button></div>`;
   $('saveCard').addEventListener('click', makeCard);
