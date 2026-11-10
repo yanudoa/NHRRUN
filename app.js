@@ -113,7 +113,7 @@ function renderResult(){
     </div></div>
     <div class="r-row r-msg"><div class="msg${T.box === 'plain' ? ' plain' : ''}">${T.box === 'plain' ? '' : `<img src="${BOX_SRC}" alt="">`}<span>${nl(T.msg)}</span></div></div>
     <div class="r-row r-tags"><div class="tags">${T.tags.map(t => `<span class="tag" style="background:${T.color}">${esc(t)}</span>`).join('')}</div></div>
-    <div class="r-row r-actions"><button class="btn" id="saveCard">러너 카드 이미지 저장</button><button class="textlink" data-act="retry" style="align-self:center">테스트 다시 하기</button></div>`;
+    <div class="r-row r-actions"><button class="btn" id="saveCard">러너 카드 이미지 저장</button></div>`;
   $('saveCard').addEventListener('click', makeCard);
 }
 
@@ -201,6 +201,5 @@ $('goReg').addEventListener('click', () => { show('reg'); setTimeout(() => $('ru
 document.addEventListener('click', e => {
   const a = e.target.closest('[data-act]'); if (!a) return;
   if (a.dataset.act === 'home') goHome();
-  if (a.dataset.act === 'retry'){ state.answers = []; state.q = 0; renderQ(); show('quiz'); }
 });
 show('start');

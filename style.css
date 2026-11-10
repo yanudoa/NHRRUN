@@ -177,6 +177,5 @@ img{display:block}
   .r-tags{top:735.5px}
   .tag{font-size:17px}
   .r-actions{top:814.5px}
-  .r-actions .textlink{margin-top:6px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
